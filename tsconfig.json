@@ -1,0 +1,31 @@
+{
+    "include": ["src/**/*", "tests/src/**/*"],
+    "exclude": ["node_modules", "dist"],
+    "compilerOptions": {
+        "target": "es2015",
+        "module": "es2015",
+        "lib": ["es2017", "es7", "es6", "dom"],
+        "moduleResolution": "node",
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "emitDeclarationOnly": false,
+        "experimentalDecorators": true,
+        "allowJs": true,
+        "strictNullChecks": false,
+        "emitDecoratorMetadata": true,
+        "strictPropertyInitialization": false,
+        "sourceMap": true,
+        "strict": false,
+        "isolatedModules": false,
+        "skipLibCheck": true,
+        "noImplicitAny": false,
+        "removeComments": true,
+        "resolveJsonModule": true,
+        "rootDirs": ["src/","tests/src"],
+        "typeRoots": ["node_modules/@types"]
+    },
+    "typedocOptions": {
+        "entryPoints": ["src/index.ts"],
+        "out": "docs"
+    }
+}
