@@ -1,5 +1,5 @@
 {
-    "name": "@elastosfoundation/commons.js.tools",
+    "name": "@dchagastelles/commons.js.tools",
     "version": "1.0.0",
     "description": "JS Tooling library for shareable code",
     "export": {
@@ -32,8 +32,11 @@
         "test:node:debug": "JEST_CIRCUS=1 node --inspect-brk node_modules/.bin/jest --runInBand --config jest.node.config.ts"
     },
     "dependencies": {
+        "@elastosfoundation/elastos-connectivity-sdk-js": "^1.0.23",
+        "@elastosfoundation/hive-js-sdk": "^2.6.2",
         "buffer": "^6.0.0",
-        "create-hash": "1.2.0"
+        "create-hash": "1.2.0",
+        "dayjs": "^1.11.2"
     },
     "devDependencies": {
         "@babel/core": "^7.16.0",
