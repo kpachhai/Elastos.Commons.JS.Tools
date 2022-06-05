@@ -1,6 +1,7 @@
 *.html
 
 dist/
+docs/
 typings/
 node_modules/
 
