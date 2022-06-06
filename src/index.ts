@@ -18,6 +18,12 @@ import { Logger } from './logger'
 import { SHA256 } from './sha256'
 import * as Validators from './validator'
 
+/**
+ * Convert callback based method to a Promise based method that returns a type and handles exceptions with rejections.
+ * 
+ * @param exec Function to convert to a promise based method.
+ * @returns New Promise.
+ */
 export function promisify<T>(exec: (reject?: (e)=>void)=>T): Promise<T> {
     return new Promise((resolve, reject)=>{
         try {
@@ -32,6 +38,12 @@ export function promisify<T>(exec: (reject?: (e)=>void)=>T): Promise<T> {
     })
 }
 
+/**
+ * Generate hash code number for the specified value.
+ * 
+ * @param input Value to generate hash code number from.
+ * @returns Hash code number.
+ */
 export function hashCode(input: string | number | boolean): number {
     if (typeof input === 'string') {
         var h = 0, i = input.length;

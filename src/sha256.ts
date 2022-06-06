@@ -21,23 +21,51 @@
  */
 
 import CryptoJS from 'crypto';
+
+/**
+ * SHA256 static utility class
+ */
 export class SHA256 {
 
+    /**
+     * Double hash the specified buffer using SHA256 algorithm.
+     * 
+     * @param buffer Buffer to hash.
+     * @returns Hashed Buffer
+     */
     public static hashTwice(buffer: Buffer): Buffer{
         let firstHash = CryptoJS.createHash('sha256').update(buffer).digest();
         return CryptoJS.createHash('sha256').update(firstHash).digest()
     }
 
+    /**
+     * Double hash the specified buffer using SHA256 and RIPEMD160 algorithms.
+     * 
+     * @param buffer Buffer to hash.
+     * @returns Hashed Buffer
+     */
     public static sha256ripemd160(buffer: Buffer): Buffer{
         let firstHash = CryptoJS.createHash('sha256').update(buffer).digest();
         return CryptoJS.createHash('ripemd160').update(firstHash).digest()
     }
 
+    /**
+     * Create hash of the specified buffers using SHA256 algorithm.
+     * 
+     * @param inputs Buffers to hash.
+     * @returns Hashed String
+     */
     public static encodeToString(...inputs: Buffer[]): string {
         let fullInput = inputs.reduce((acc, curr) => Buffer.concat([acc, curr]), Buffer.from(""));
         return CryptoJS.createHash("sha256").update(fullInput).digest().toString();
     }
 
+    /**
+     * Create hash of the specified buffers using SHA256 algorithm.
+     * 
+     * @param inputs Buffers to hash.
+     * @returns Hashed Buffer
+     */
     public static encodeToBuffer(...inputs: Buffer[]): Buffer {
         let fullInput = inputs.reduce((acc, curr) => Buffer.concat([acc, curr]), Buffer.from(""));
         return CryptoJS.createHash("sha256").update(fullInput).digest();

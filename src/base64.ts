@@ -20,40 +20,96 @@
  * SOFTWARE.
  */
 
+/**
+ * Base64 static utility class
+ */
 export class Base64 {
+
+    /**
+     * Convert standard string to base64 string.
+     * 
+     * @param value Standard string to be converted.
+     * @returns New base64 encoded string.
+     */
     public static fromString(value: string): string{
         let base64string = Buffer.from(value, "utf-8").toString("base64");
         return  this.convertToURI(base64string)
     }
+
+    /**
+     * Convert hexadecimal string to base64 string.
+     * 
+     * @param hexString Hexadecimal string to be converted.
+     * @returns New base64 encoded string.
+     */
     public static fromHex(hexString: string): string{
        return this.encode(hexString)
     }
+    
+    /**
+     * Convert URI encoded base64 string to base64 string.
+     * 
+     * @param b64uString URI encoded base64 string to be converted.
+     * @returns New base64 encoded string.
+     */
     public static fromUrlFormat(b64uString: string): string{
         return this.convertFromURI(b64uString)
     }
+
+    /**
+     * Convert base64 string to URI encoded base64 string.
+     * 
+     * @param b64String base64 string to be converted.
+     * @returns New URI base64 encoded string.
+     */
     public static toUrlFormat(b64String: string): string{
         return this.convertToURI(b64String)
     }
 
+    /**
+     * Convert base64 string to hexacimal string.
+     * 
+     * @param b64String base64 string to be converted.
+     * @returns New decoded hexadecimal string.
+     */
     public static toHex(b64String: string): string{
         return this.decode(b64String)
     }
+
+    /**
+     * Convert base64 string to string.
+     * 
+     * @param b64String base64 string to be converted.
+     * @returns New decoded string.
+     */
     public static toString(b64String: string): string{
         let b64str = b64String
         if (!b64str.endsWith("=")) b64str = this.convertFromURI(b64str)
         return Buffer.from(b64str, "base64").toString("utf-8")
     }
 
-    // All base64 contents inside the DID objects are base64 URL safe mode.
-    // Decode the base64 URL safe input into the string encoded in hex.
+    /**
+     * Convert base64 string to hexadecimal string.
+     * 
+     * Input string can be URI encoded.
+     * 
+     * @param b64uString base64 URI encoded string to be converted.
+     * @returns New decoded hexadecimal string.
+     */
     public static decode(b64uString: string): string {
         let b64str = b64uString
         if (!b64str.endsWith("=")) b64str = this.convertFromURI(b64str)
         return Buffer.from(b64str, "base64").toString("hex");
     }
 
-    public static encode(hexToBase64: string): string{
-        let b64str = Buffer.from(hexToBase64, "hex").toString("base64");
+    /**
+     * Convert hexadecimal string to URI encoded base64 string.
+     * 
+     * @param hexToBase64 hexadecimal string to be converted.
+     * @returns New URI encoded base64 string..
+     */
+    public static encode(hexString: string): string{
+        let b64str = Buffer.from(hexString, "hex").toString("base64");
         return  this.convertToURI(b64str)
     }
 
