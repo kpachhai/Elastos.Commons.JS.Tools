@@ -10,15 +10,15 @@ import {
  } from "../../src/exception"
 
 describe("test HTTP Exceptions", () => {
-    test("Validate NOTFOUND", () => {
+    test("Validate BAD_REQUEST", () => {
         let exception = NodeRPCException.forHttpCode(NodeRPCException.BAD_REQUEST);
         expect(exception).toBeInstanceOf(InvalidParameterException);
     });
-    test("Validate NOTFOUND", () => {
+    test("Validate UNAUTHORIZED", () => {
         let exception = NodeRPCException.forHttpCode(NodeRPCException.UNAUTHORIZED);
         expect(exception).toBeInstanceOf(UnauthorizedException);
     });
-    test("Validate NOTFOUND", () => {
+    test("Validate FORBIDDEN", () => {
         let exception = NodeRPCException.forHttpCode(NodeRPCException.FORBIDDEN);
         expect(exception).toBeInstanceOf(ForbiddenException);
     });
@@ -26,15 +26,15 @@ describe("test HTTP Exceptions", () => {
         let exception = NodeRPCException.forHttpCode(NodeRPCException.NOT_FOUND);
         expect(exception).toBeInstanceOf(NotFoundException);
     });
-    test("Validate NOTFOUND", () => {
+    test("Validate ALREADY_EXISTS", () => {
         let exception = NodeRPCException.forHttpCode(NodeRPCException.ALREADY_EXISTS);
         expect(exception).toBeInstanceOf(AlreadyExistsException);
     });
-    test("Validate NOTFOUND", () => {
+    test("Validate INSUFFICIENT_STORAGE", () => {
         let exception = NodeRPCException.forHttpCode(NodeRPCException.INSUFFICIENT_STORAGE);
         expect(exception).toBeInstanceOf(InsufficientStorageException);
     });
-    test("Validate NOTFOUND", () => {
+    test("Validate SERVER_EXCEPTION", () => {
         let exception = NodeRPCException.forHttpCode(NodeRPCException.SERVER_EXCEPTION);
         expect(exception).toBeInstanceOf(ServerUnknownException);
     });
