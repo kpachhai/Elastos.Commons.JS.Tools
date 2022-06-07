@@ -43,7 +43,7 @@ class LogLevel {
  * 
  * This logger uses the following format to print to console:
  * 
- * TIMESTAMP LEVEL LOGGER (CID) MESSAGE
+ * TIMESTAMP LEVEL LOGGER (CID)  MESSAGE
  * 
  * Ex: 2022-05-27T03:59:51.576Z TRACE AuthService (6ms7lkj) Connecting to provider...
  * 

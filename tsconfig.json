@@ -21,7 +21,6 @@
         "noImplicitAny": false,
         "removeComments": true,
         "resolveJsonModule": true,
-        "outDir": "dist",
         "rootDirs": ["src/","tests/src"],
         "typeRoots": ["node_modules/@types"]
     },

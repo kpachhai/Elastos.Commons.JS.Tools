@@ -17,8 +17,16 @@ export class ParentException extends Error {
         this.causedBy = causedBy;
         Object.setPrototypeOf(this, new.target.prototype);
         let logger = new Logger(this.constructor.name);
-        let stack = (causedBy ? "\nCaused by: " + causedBy.message + (causedBy.stack ? "\nCaused by: " + causedBy.stack : "") : "");
+        let stack = (causedBy ? "\nCaused by: " + causedBy.message + (causedBy.stack ? "\n" + causedBy.stack : "") : "");
         logger.error(message + stack);
+    }
+
+    public getMessage(): string {
+        return this.message;
+    }
+
+    public getCause(): Error {
+        return this.causedBy;
     }
 }
 
@@ -72,7 +80,7 @@ export class NodeRPCException extends HttpException {
    
     public static BAD_REQUEST = 400; //InvalidParameterException
 	public static UNAUTHORIZED = 401; //UnauthorizedException
-	public static FORBIDDEN	= 403; //VaultForbiddenException
+	public static FORBIDDEN	= 403; //ForbiddenException
 	public static NOT_FOUND	= 404; //NotFoundException
 	public static ALREADY_EXISTS = 455; //AlreadyExistsException
 	public static INSUFFICIENT_STORAGE = 507; //InsufficientStorageException
