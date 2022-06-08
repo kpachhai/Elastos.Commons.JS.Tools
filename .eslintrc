@@ -1,4 +1,4 @@
-module.exports = {
+{
     root: true,
     parser: '@typescript-eslint/parser',
     plugins: [
@@ -6,13 +6,12 @@ module.exports = {
       'jest'
     ],
     parserOptions: {
-      project: "./tsconfig.json"
+      project: "tsconfig.json",
+      sourceType: "module"
     },
-    extends: [
-      'eslint:recommended',
-      'plugin:@typescript-eslint/recommended',
-      'plugin:jest/recommended',
-    ],
+    overrides: [{
+      files: ['*.ts']
+    }],
     env: {
       browser: true,
       es6: true,

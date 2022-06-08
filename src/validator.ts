@@ -25,7 +25,7 @@ export function checkEmpty(value: string, errorMessage: string): void {
  * @param value Value to be verified.
  * @param errorMessage Error thrown when the value is null.
  */
-export function checkNotNull(value: any, errorMessage: string): void {
+export function checkNotNull(value: unknown, errorMessage: string): void {
     if (value === null) {
         throw new Error(errorMessage);
     }

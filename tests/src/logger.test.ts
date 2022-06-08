@@ -4,7 +4,7 @@ describe("test Logger", () => {
 
     const testTime = "1111-11-11T11:11:11.111Z";
     let LAST_LOG: string;
-    let realConsoleLogger = console.log;
+    const realConsoleLogger = console.log;
 
     beforeAll(() => {
         jest.useFakeTimers();
@@ -26,7 +26,7 @@ describe("test Logger", () => {
 
     test("Set logger level", () => {
         Logger.setDefaultLevel(Logger.TRACE);
-        let myLogger = new Logger("MyTestLogger");
+        const myLogger = new Logger("MyTestLogger");
         expect(myLogger.getLevel()).toEqual(Logger.TRACE);
         myLogger.setLevel(Logger.DEBUG);
         expect(myLogger.getLevel()).toEqual(Logger.DEBUG);
@@ -34,14 +34,14 @@ describe("test Logger", () => {
 
     test("Validate logger levels", () => {
         const loggerName = "MyTestLogger";
-        let myLogger = new Logger(loggerName);
+        const myLogger = new Logger(loggerName);
 
         [
             Logger.TRACE.name,
             Logger.DEBUG.name,
             Logger.INFO.name,
             Logger.WARNING.name
-        ].forEach((level, index) => {
+        ].forEach((level) => {
             myLogger[level.toLowerCase()]("{} Msg", level);
             expect(LAST_LOG).toContain(testTime + " " + level + " " + loggerName + " (" + myLogger.currentCID() + ")  " + level + " Msg");
             //expect(LAST_LOG).toContain(level + " Msg");

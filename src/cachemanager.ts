@@ -5,7 +5,7 @@ import { Logger } from "./logger";
  * Memory based static caching utility class. 
  * 
  * Cache keys are built from 2 parameters:
- *  - key: A string that identifies a caching element
+ *  - key: An instance of any type that identifies a caching element. See get and set methods for more information on keys.
  *  - type: An optional string that represents the type of the cached element. Can be used to cache multiple objects of the same type from different context.
  *          Ex: let session: Session = CacheManager.get("usersession"); let anonymousSession = CacheManager.get("usersession", "anonymous");
  */
@@ -17,18 +17,25 @@ export class CacheManager {
     private static LOG = new Logger("CacheManager");
 
     // This is a static class so there's no need to create an instance
-    private constructor() {}
+    private constructor() {
+        //
+    }
 
     /**
      * Retrieve an element from the cache.
      * 
-     * @param key String key that identifies a cached element.
+     * The 'key' parameter can be of any type. If the type isn't 'string', it
+     * will be converted to a JSON string if there's no 'toString()' method
+     * available for its type. When not using a string, it's recommended to
+     * use a type with a toString() method.
+     * 
+     * @param key A key that identifies a cached element.
      * @param type Optional type of the cached element.
      * @returns Cached element or undefined if not found.
      */
-    public static get(key: any, type: string = CacheManager.EMPTY): any {
+    public static get(key: unknown, type: string = CacheManager.EMPTY): unknown {
         try {
-            let value = CacheManager.CACHE_MAP.get(CacheManager.buildKey(type, key));
+            const value = CacheManager.CACHE_MAP.get(CacheManager.buildKey(type, key));
             CacheManager.LOG.debug("Retrieved cached value for {}.{}: {}", type, key, value ?? "Not found");
             return value;
         } catch (e) {
@@ -40,13 +47,18 @@ export class CacheManager {
     /**
      * Add an element to the cache.
      * 
-     * @param key String key that identifies the new element.
+     * The 'key' parameter can be of any type. If the type isn't 'string', it
+     * will be converted to a JSON string if there's no 'toString()' method
+     * available for its type. When not using a string, it's recommended to
+     * use a type with a toString() method.
+     * 
+     * @param key Key that identifies the new element.
      * @param value Element to be cached.
      * @param type Optional type of the new cached element.
      */
-    public static set(key: any, value: any, type: string = CacheManager.EMPTY): void {
+    public static set(key: unknown, value: unknown, type: string = CacheManager.EMPTY): void {
         try {
-            let cacheKey = CacheManager.buildKey(type, key);
+            const cacheKey = CacheManager.buildKey(type, key);
             if (!value) {
                 CacheManager.CACHE_MAP.delete(cacheKey);
                 CacheManager.LOG.debug("Cleared cache entry {}.{}.", type, key);
@@ -86,9 +98,9 @@ export class CacheManager {
         }
     }
 
-    private static buildKey(type: string, key: any): string {
+    private static buildKey(type: string, key: unknown): string {
         checkNotNull(type, "Cache type cannot be null.");
-        checkEmpty(key, "Cache key cannot be empty.");
+        checkNotNull(key, "Cache key cannot be null.");
         let strKey = key;
         if (typeof key != 'string') {
             if (typeof key['toString'] === 'function') {
@@ -98,6 +110,6 @@ export class CacheManager {
                 CacheManager.LOG.warn("Consider using a string, or a type with a 'toString()' method, as cache key.");
             }
         }
-        return type + CacheManager.SEP + strKey;
+        return (type ? type + CacheManager.SEP : "") + strKey;
     }
 }

@@ -104,7 +104,6 @@ export default command => {
             interop: id => {
                 return 'default';
             },
-            manualChunks: { did: ['src/index.ts'] },
             sourcemap: !prodBuild
         }
     };
@@ -115,7 +114,9 @@ export default command => {
 
     const esmBuild = {
         ...commonJSBuild,
-        input: { 'commons.js.tools.js': 'src/index.ts' },
+        input: {
+            'commons.js.tools.js': 'src/index.ts'
+        },
         plugins: [
             ...nodePlugins,
             emitModulePackageFile(),
@@ -130,7 +131,9 @@ export default command => {
     };
 
     const browserBuilds = {
-        input: 'src/index.ts',
+        input: {
+            'commons.js.tools.browser.js': 'src/index.ts'
+        },
         onwarn,
         plugins: [
             // IMPORTANT: DON'T CHANGE THE ORDER OF THINGS BELOW TOO MUCH! OTHERWISE YOU'LL GET
@@ -197,12 +200,12 @@ export default command => {
         strictDeprecations: true,
         output: [
             {
-                file: 'dist/es/commons.js.tools.browser.js',
+                dir: 'dist/es',
                 format: 'es',
                 sourcemap: !prodBuild,
             },
         ]
     };
 
-    return [ commonJSBuild, esmBuild, browserBuilds];
+    return [ commonJSBuild, esmBuild, browserBuilds ];
 };

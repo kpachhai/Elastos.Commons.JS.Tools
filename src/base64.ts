@@ -32,7 +32,7 @@ export class Base64 {
      * @returns New base64 encoded string.
      */
     public static fromString(value: string): string{
-        let base64string = Buffer.from(value, "utf-8").toString("base64");
+        const base64string = Buffer.from(value, "utf-8").toString("base64");
         return  this.convertToURI(base64string)
     }
 
@@ -109,7 +109,7 @@ export class Base64 {
      * @returns New URI encoded base64 string..
      */
     public static encode(hexString: string): string{
-        let b64str = Buffer.from(hexString, "hex").toString("base64");
+        const b64str = Buffer.from(hexString, "hex").toString("base64");
         return  this.convertToURI(b64str)
     }
 

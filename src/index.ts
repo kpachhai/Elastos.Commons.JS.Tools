@@ -27,7 +27,7 @@ import * as Validators from './validator'
 export function promisify<T>(exec: (reject?: (e)=>void)=>T): Promise<T> {
     return new Promise((resolve, reject)=>{
         try {
-            let result: T = exec((e)=>{
+            const result: T = exec((e)=>{
                 reject(e);
             });
             resolve(result);
@@ -46,7 +46,7 @@ export function promisify<T>(exec: (reject?: (e)=>void)=>T): Promise<T> {
  */
 export function hashCode(input: string | number | boolean): number {
     if (typeof input === 'string') {
-        var h = 0, i = input.length;
+        let h = 0, i = input.length;
         while (i > 0) {
             h = (h << 5) - h + input.charCodeAt(--i) | 0;
         }

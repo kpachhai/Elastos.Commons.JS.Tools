@@ -117,7 +117,7 @@ export class Logger {
      * @returns 
      */
     public levelIs(level: LogLevel): boolean {
-        let currentLevel = this.logLevel ? this.logLevel : Logger.DEFAULT_LOG_LEVEL;
+        const currentLevel = this.logLevel ? this.logLevel : Logger.DEFAULT_LOG_LEVEL;
         return level.id >= currentLevel.id;
     }
 
@@ -163,7 +163,7 @@ export class Logger {
      * 
      * @param data Data to be logged to console.
      */
-    public log(...data: any) {
+    public log(...data: unknown[]) {
         if (this.getLevel().id <= Logger.INFO.id) {
             console.log(this.format(Logger.INFO, data));
         }
@@ -174,7 +174,7 @@ export class Logger {
      * 
      * @param data Data to be logged to console.
      */
-    public info(...data: any) {
+    public info(...data: unknown[]) {
         if (this.getLevel().id <= Logger.INFO.id) {
             console.log(this.format(Logger.INFO, data));
         }
@@ -185,7 +185,7 @@ export class Logger {
      * 
      * @param data Data to be logged to console.
      */
-    public debug(...data: any) {
+    public debug(...data: unknown[]) {
         if (this.getLevel().id <= Logger.DEBUG.id) {
             console.log(this.format(Logger.DEBUG, data));
         }
@@ -196,7 +196,7 @@ export class Logger {
      * 
      * @param data Data to be logged to console.
      */
-    public trace(...data: any) {
+    public trace(...data: unknown[]) {
         if (this.getLevel().id <= Logger.TRACE.id) {
             console.log(this.format(Logger.TRACE, data));
         }
@@ -207,7 +207,7 @@ export class Logger {
      * 
      * @param data Data to be logged to console.
      */
-    public warn(...data: any) {
+    public warn(...data: unknown[]) {
         if (this.getLevel().id <= Logger.WARNING.id) {
             console.log(this.format(Logger.WARNING, data));
         }
@@ -218,14 +218,14 @@ export class Logger {
      * 
      * @param data Data to be logged to console.
      */
-    public error(...data: any) {
+    public error(...data: unknown[]) {
         if (this.getLevel().id <= Logger.ERROR.id) {
             console.log(this.format(Logger.ERROR, data));
         }
     }
 
-    private format(level: LogLevel, data: any[]): string {
-        let logLine = (new Date()).toISOString() + " " + level.name.toUpperCase() + " " + this.context + " " + (this.cid ? "(" + this.cid + ") " : "");
+    private format(level: LogLevel, data: unknown[]): string {
+        const logLine = (new Date()).toISOString() + " " + level.name.toUpperCase() + " " + this.context + " " + (this.cid ? "(" + this.cid + ") " : "");
         if (!data || data.length < 1)
             return logLine;
         let content = String(data[0]);

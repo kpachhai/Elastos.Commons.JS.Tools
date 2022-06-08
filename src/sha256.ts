@@ -34,7 +34,7 @@ export class SHA256 {
      * @returns Hashed Buffer
      */
     public static hashTwice(buffer: Buffer): Buffer{
-        let firstHash = CryptoJS.createHash('sha256').update(buffer).digest();
+        const firstHash = CryptoJS.createHash('sha256').update(buffer).digest();
         return CryptoJS.createHash('sha256').update(firstHash).digest()
     }
 
@@ -45,7 +45,7 @@ export class SHA256 {
      * @returns Hashed Buffer
      */
     public static sha256ripemd160(buffer: Buffer): Buffer{
-        let firstHash = CryptoJS.createHash('sha256').update(buffer).digest();
+        const firstHash = CryptoJS.createHash('sha256').update(buffer).digest();
         return CryptoJS.createHash('ripemd160').update(firstHash).digest()
     }
 
@@ -56,7 +56,7 @@ export class SHA256 {
      * @returns Hashed String
      */
     public static encodeToString(...inputs: Buffer[]): string {
-        let fullInput = inputs.reduce((acc, curr) => Buffer.concat([acc, curr]), Buffer.from(""));
+        const fullInput = inputs.reduce((acc, curr) => Buffer.concat([acc, curr]), Buffer.from(""));
         return CryptoJS.createHash("sha256").update(fullInput).digest().toString();
     }
 
@@ -67,7 +67,7 @@ export class SHA256 {
      * @returns Hashed Buffer
      */
     public static encodeToBuffer(...inputs: Buffer[]): Buffer {
-        let fullInput = inputs.reduce((acc, curr) => Buffer.concat([acc, curr]), Buffer.from(""));
+        const fullInput = inputs.reduce((acc, curr) => Buffer.concat([acc, curr]), Buffer.from(""));
         return CryptoJS.createHash("sha256").update(fullInput).digest();
     }
 }
