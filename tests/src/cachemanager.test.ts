@@ -8,7 +8,7 @@ describe("test CacheManager", () => {
         }
         CacheManager.set("newelement", elementToCache);
         const elementFromCache = CacheManager.get("newelement");
-        expect(elementToCache.id).toEqual(elementFromCache.id);
-        expect(elementToCache.data).toEqual(elementFromCache.data);
+        expect(elementToCache['id']).toEqual(elementFromCache['id']);
+        expect(elementToCache['data']).toEqual(elementFromCache['data']);
     });
 });
