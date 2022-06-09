@@ -1,10 +1,9 @@
 import commonjs from '@rollup/plugin-commonjs';
 import json from '@rollup/plugin-json';
 import nodeResolve from '@rollup/plugin-node-resolve';
-import typescript from "@rollup/plugin-typescript";
+import typescript from "rollup-plugin-typescript2";
 import replace from '@rollup/plugin-replace';
 import size from 'rollup-plugin-size';
-import eslint from '@rollup/plugin-eslint';
 import alias from "@rollup/plugin-alias";
 import globals from 'rollup-plugin-node-globals';
 import { visualizer } from 'rollup-plugin-visualizer';
@@ -88,8 +87,7 @@ export default command => {
         },
         onwarn,
         plugins: [
-            ...nodePlugins,
-            eslint()
+            ...nodePlugins
         ],
         treeshake,
         strictDeprecations: true,
