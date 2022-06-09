@@ -1,3 +1,5 @@
+import { IllegalArgumentException } from './exception';
+
 /**
  * Check argument validity.
  * 
@@ -6,7 +8,7 @@
  */
 export function checkArgument(condition: boolean, errorMessage: string): void {
     if (!condition)
-        throw new Error(errorMessage);
+        throw new IllegalArgumentException(errorMessage);
 }
 
 /**
@@ -27,7 +29,7 @@ export function checkEmpty(value: string, errorMessage: string): void {
  */
 export function checkNotNull(value: unknown, errorMessage: string): void {
     if (value === null) {
-        throw new Error(errorMessage);
+        throw new IllegalArgumentException(errorMessage);
     }
 }
 

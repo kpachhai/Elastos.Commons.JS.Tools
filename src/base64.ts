@@ -25,6 +25,10 @@
  */
 export class Base64 {
 
+    private constructor() {
+        //
+    }
+
     /**
      * Convert standard string to base64 string.
      * 

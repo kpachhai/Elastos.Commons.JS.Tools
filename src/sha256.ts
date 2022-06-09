@@ -27,6 +27,19 @@ import CryptoJS from 'crypto';
  */
 export class SHA256 {
 
+    private constructor() {
+        //
+    }
+
+    /**
+     * Simple call forwarder to CryptoJS.createHash
+     * 
+     * @returns sha256 hash
+     */
+    public static createHash(algorithm = 'sha256'): CryptoJS.Hash {
+        return CryptoJS.createHash(algorithm);
+    }
+
     /**
      * Double hash the specified buffer using SHA256 algorithm.
      * 
