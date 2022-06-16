@@ -168,15 +168,6 @@ export class NotFoundException extends NodeRPCException  {
 }
 
 /**
- * Custom Vault HTTP Exception for NodeRPCException.NOT_FOUND (404)
- */
-export class VaultNotFoundException extends NodeRPCException  {
-    constructor(message: string, causedBy?: Error, internalCode?: number) {
-        super(NodeRPCException.NOT_FOUND, internalCode, message, causedBy);
-    }
-}
-
-/**
  * HTTP Exception for NodeRPCException.ALREADY_EXISTS (455)
  */
 export class AlreadyExistsException extends NodeRPCException  {
